@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Google - Collect and Sort Information">
+    <meta name="App Designer/Developer" content="Aaron Judge">
+
+    <script src="https://kit.fontawesome.com/2e9e8b2006.js" crossorigin="anonymous"></script>
+    
+    <link href="https://upload.wikimedia.org/wikipedia/commons/2/2d/Google-favicon-2015.png" rel="icon" type="image/x-icon"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+
+    <title>MyGoogle Home</title>
+</head>
+
+<!--STYLE SECTION-->
+<style>
+    *{
+        margin:0;
+        padding:0;
+        text-decoration: none;
+        list-style: none;
+        box-sizing: border-box;
+    }
+
+    /*Fonts */
+    h1,h2,h3,h4,h5,h6{
+        /*Bold Font*/
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        color: #68a2f5;
+    }
+
+    .light-theme{
+        background-color: #ffffff;
+    }
+
+    .dark-theme{
+        background-color: #1D1D1D;
+    }
+
+    .light-theme_text{
+        color: #000;
+    }
+
+    .dark-theme_text{
+        color: #ffffff;
+    }
+
+    p, pre, a{
+        font-family: 'Roboto', sans-serif;
+        color: #000;
+    }
+
+    .page-container{
+        margin: 1px;
+    }
+
+    header{
+        width: 100%;
+        height: 75px;
+        border-bottom: 2px solid #c4c0c0;
+        display: flex;
+        flex-direction: row;
+        justify-content:space-evenly;  
+        position: fixed;
+        top: 0px;
+    }
+    
+    header ul li{
+        float:right;
+        padding: 10px;
+        font-size: 30px;
+        margin: 10px;   
+    }
+
+    .menuBtn{
+        padding: 10px;
+        font-size: 30px;
+        margin: 10px;
+    }
+
+    .menuBtn:hover{
+        background-color: rgb(231, 227, 227);
+        border-radius: 100px;
+    }
+
+    .menuItem:hover{
+        background-color: rgb(231, 227, 227);
+        border-radius: 100%;
+    }
+
+    .menuLink:hover{
+        border-bottom: 3px solid black;
+    }
+
+    .showcase-section{
+        display: flex;
+        justify-content: center;
+        margin: 15px;
+        padding-top: 70px;
+    }
+
+    .current{
+        border-bottom: 3px solid #000000;
+    }
+
+    .portfolio-section{
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        margin:10px;
+    }
+
+    .box{
+        border: 2px solid #bbb8b8;
+        border-radius: 5px;
+        width: 25%;
+        margin: 10px;
+        padding:10px;
+        text-align: center;
+    }
+
+    .docBtn{
+        background-color: #357adb;
+        border:none;
+        border-radius: 5px;
+        color: #ffffff;
+        padding: 5px 10px 5px 10px;
+        font-size: 20px;
+    }
+
+    .docBtn:hover{
+        background-color: #ffffff;
+        border: 1px solid #357adb;
+        color: #357adb;
+    }
+
+    .box p{
+        margin: 10px;
+        font-size: 20px;
+    }
+
+    .box a{
+        color: #357adb;
+    }
+
+    .box a:hover{
+        font-size: 17px;
+    }
+
+    .content-heading{
+     text-align: center;
+    }
+    /*Styling for the google style side menu*/
+    .side-nav{
+        height: 100%;
+        width: 0;
+        position:fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-decoration: none;
+    }
+
+    .side-nav a{
+        padding: 10px;
+        margin:10px;
+        justify-content: space-evenly;
+        text-align: left;
+        text-decoration: none;
+    }
+
+    .side-nav a img{
+        width: 25px;
+    }
+
+    .side-nav a i{
+        color: #777777;
+        font-size: 20px;
+    }
+    footer{
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: rgb(202, 194, 194);
+    }
+    .upper-footer{
+        margin: 10px;
+    }
+    .upper-footer ul{
+        display: flex;
+        justify-content: center;
+    }
+    .upper-footer ul li {
+        margin: 5px;
+    }
+    .upper-footer ul li a:hover{
+        border-bottom: 2px solid #000;
+    }
+    .lower-footer{
+        background-color: rgb(202, 194, 194);
+        display: flex;
+        justify-content: center;
+        margin:10px;
+    }
+    .lower-footer p a:hover{
+        color: #357adb;
+    }
+    .phone-footer{
+        display: none;
+    }
+    /*Media queries for smaller screens i.e mobile phones & tablets*/
+    @media all and (max-width:1295px){
+        .side-nav a img{
+            display: none;
+        }
+
+        .side-nav a i{
+            display: none;
+        }
+
+        .side-nav{
+            display: none;
+        }
+    }
+    @media all and (max-width:1050px){
+        .menuLink{
+            display: none;
+        }
+    }
+    @media all and (max-width:800px){
+        footer{
+            display: none;
+        }
+    }
+    @media all and (max-width:600px) {
+        .menuLink{
+            display: none;
+        }
+
+        .side-nav a img{
+            display: none;
+        }
+
+        .side-nav a i{
+            display: none;
+        }
+
+        .side-nav{
+            display: none;
+        }
+
+        .google-logo{
+            width: 240px;
+        }
+
+        .portfolio-section{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            margin: 15px;
+        }
+
+        .box{
+            width: 95%;
+        }
+        .phone-footer{
+            display:flex;
+            justify-content: center;
+            text-align: center;
+            font-size: 18px;
+            padding: 10px;
+        }
+        .phone-footer a:hover{
+            color: #357adb;
+        }
+    }
+</style>
+
+<!--BODY SECTION-->
+<body class="light-theme">
+    <!--Google Style side menu-->
+    <div id="side-menu" class="side-nav">
+
+        <a href="https://www.google.com/">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Google-favicon-2015.png" alt="google logo style close menu button" width="30px">
+        </a>
+
+        <a href="https://script.google.com/home/start">
+            <img src="https://railsware.com/blog/wp-content/uploads/2017/12/Useful-Google-Spreadsheet-.png" alt="apps script logo">
+        </a>
+
+        <a href="https://drive.google.com/drive/my-drive">
+            <img src="https://cdn.iconscout.com/icon/free/png-256/google-drive-2923656-2416659.png" alt="google drive">
+        </a>
+
+        <a href="https://mail.google.com/">
+            <img src="https://cdn.icon-icons.com/icons2/2631/PNG/512/gmail_new_logo_icon_159149.png" alt="gmail">
+        </a>
+
+        <a href="https://developers.google.com/">
+            <img src="https://code.google.com/images/developers.png" alt="google developers">
+        </a>
+        
+        <a href="#" class="btn_two">
+            <i class="fas fa-cog"></i>
+        </a>
+
+        <a href="#">
+            <i class="fas fa-toggle-on"></i>
+        </a>
+    </div>
+
+    <div class="page-container">
+        
+        <header class="light-theme">
+            <a href="#" class="menuBtn"><i class="fas fa-bars"></i></a>
+
+            <ul>
+                <li><a href="#" class="menuItem"><i class="fas fa-user-circle"></i></a></li>
+                <li><a href="#" class="btn"><i class="fas fa-cog"></i></a></li>
+                <li><a href="#" class="menuItem"><i class="fas fa-home"></i></a></li>
+
+                <li><a href="#" class="menuLink">My Dashboard</a></li>
+                <li><a href="#" class="menuLink">Code Samples</a></li>
+                <li><a href="#" class="menuLink">Resources</a></li>
+                <li><a href="#" class="menuLink current">Home</a></li>
+            </ul>
+        </header>
+
+        <div class="showcase-section">
+            <img class="google-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/368px-Google_2015_logo.svg.png" alt="Google logo">
+        </div>
+
+        <h1 class="content-heading">My Portfolio</h1>
+
+        <div class="portfolio-section">
+
+            <div class="box">
+                <h2>Beginner Python Mathematics Tutorial</h2>
+                <p id="screenText1" class="light-theme_text">A small collection of simple python 3 scripts used for 
+                   learning some maths in programming in python.</p>
+                <a href="#">Code Sample</a> <button class="docBtn">Documentation</button>
+            </div>
+
+            <div class="box">
+                <h2>Python Hard Disk Sector Calculator</h2>
+                <p id="screenText2" class="light-theme_text">This small calculator coded in python will calculate the amount of sectors your hard disk has.Get your code sample</p>
+                <a href="https://github.com/AaronJ97/Python_Disk_Sector_Calculator">Code Sample</a> <button class="docBtn">Documentation</button>
+            </div>
+
+            <div class="box">
+                <h2>Beginner HTML & CSS Google Sign In Clone</h2>
+                <p id="screenText3" class="light-theme_text">a modern sign in UI using the same styling that google would use. coded in html & css. An easy beginner project.</p>
+                <a href="https://github.com/AaronJ97/Google-Sign-in-clone">Code Sample</a> <button class="docBtn">Documentation</button>
+            </div>
+        </div>
+
+        <div class="portfolio-section">
+
+            <div class="box">
+                <h2>Example Project 1</h2>
+                <p id="screenText4" class="light-theme_text">This is some example text to <br> showcase something here.</p>
+                <a href="#">Code Sample</a> <button class="docBtn">Documentation</button>
+            </div>
+
+            <div class="box">
+                <h2>Example Project 1</h2>
+                <p id="screenText5" class="light-theme_text">This is some example text to <br> showcase something here.</p>
+                <a href="#">Code Sample</a> <button class="docBtn">Documentation</button>
+            </div>
+
+            <div class="box">
+                <h2>Example Project 1</h2>
+                <p id="screenText6" class="light-theme_text">This is some example text to <br> showcase something here.</p>
+                <a href="#">Code Sample</a> <button class="docBtn">Documentation</button>
+            </div>
+        </div>
+
+        <div class="portfolio-section">
+
+            <div class="box">
+                <h2>Example Project 1</h2>
+                <p id="screenText7" class="light-theme_text">This is some example text to <br> showcase something here.</p>
+                <a href="#">Code Sample</a> <button class="docBtn">Documentation</button>
+            </div>
+
+            <div class="box">
+                <h2>Example Project 1</h2>
+                <p id="screenText8" class="light-theme_text">This is some example text to <br> showcase something here.</p>
+                <a href="#">Code Sample</a> <button class="docBtn">Documentation</button>
+            </div>
+
+            <div class="box">
+                <h2>Example Project 1</h2>
+                <p id="screenText9" class="light-theme_text">This is some example text to <br> showcase something here.</p>
+                <a href="#">Code Sample</a> <button class="docBtn">Documentation</button>
+            </div>
+        </div>
+        <!--End of Page Container-->
+        <footer>
+            <div class="upper-footer">
+                <ul>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </div>
+            <hr>
+            <div class="lower-footer">
+                <p> This Google Themed Portfolio Was Developed By <a href="https://www.facebook.com/profile.php?id=100070123982765">Aaron Judge</a> 2021</p>
+            </div>
+        </footer>
+        <footer class="phone-footer">
+            <a href="https://www.facebook.com/profile.php?id=100070123982765">Coded By Aaron Judge.</a>
+        </footer>
+    </div>
+
+    <!--Page JavaScript Section-->
+    <script>
+        'use strict';
+        const switcher = document.querySelector('.btn');
+        switcher.addEventListener('click', function(){
+            document.body.classList.toggle('dark-theme'); 
+            document.getElementById("screenText1").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText2").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText3").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText4").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText5").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText6").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText7").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText8").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText9").classList.toggle('dark-theme_text'); 
+        });
+
+        const switcher2 = document.querySelector('.btn_two');
+        switcher2.addEventListener('click', function(){
+            document.body.classList.toggle('dark-theme');
+            document.getElementById("screenText1").classList.toggle('dark-theme_text');
+            document.getElementById("screenText2").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText3").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText4").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText5").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText6").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText7").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText8").classList.toggle('dark-theme_text'); 
+            document.getElementById("screenText9").classList.toggle('dark-theme_text'); 
+        });
+    </script>
+</body>
+</html>
